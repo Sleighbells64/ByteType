@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+import uvm_pkg::*;
 `include "flexcounter_if.svh"
 
 module tb_flexcounter ();
@@ -35,34 +36,34 @@ module tb_flexcounter ();
   endtask
 
   initial begin
-      run_test("test");
+    run_test("test");
   end
-//   initial begin
-//     $dumpfile("waveform.vcd");
-//     $dumpvars(0, DUT);
-//     resetDUT();
-//     $display("%d", fcif.strobe);
-//
-//     // normal counting
-//     fillInterface(fcif, 1, 2);
-//     @(negedge tb_clk);
-//     @(negedge tb_clk);
-//     if (~fcif.strobe) begin
-//       $display("fcif.strobe = %d, failed to display", fcif.strobe);
-//     end
-//
-//     @(negedge tb_clk);
-//     if (fcif.strobe) begin
-//       $display("fcif.strobe = %d, failed to clear", fcif.strobe);
-//     end
-//     @(negedge tb_clk);
-//     @(negedge tb_clk);
-//     if (~fcif.strobe) begin
-//       $display("fcif.strobe = %d, failed to display 2nd time", fcif.strobe);
-//     end
-//
-//
-//     #100 $finish;
-//   end
-//
-// endmodule
+  //   initial begin
+  //     $dumpfile("waveform.vcd");
+  //     $dumpvars(0, DUT);
+  //     resetDUT();
+  //     $display("%d", fcif.strobe);
+  //
+  //     // normal counting
+  //     fillInterface(fcif, 1, 2);
+  //     @(negedge tb_clk);
+  //     @(negedge tb_clk);
+  //     if (~fcif.strobe) begin
+  //       $display("fcif.strobe = %d, failed to display", fcif.strobe);
+  //     end
+  //
+  //     @(negedge tb_clk);
+  //     if (fcif.strobe) begin
+  //       $display("fcif.strobe = %d, failed to clear", fcif.strobe);
+  //     end
+  //     @(negedge tb_clk);
+  //     @(negedge tb_clk);
+  //     if (~fcif.strobe) begin
+  //       $display("fcif.strobe = %d, failed to display 2nd time", fcif.strobe);
+  //     end
+  //
+  //
+  //     #100 $finish;
+  //   end
+  //
+endmodule
