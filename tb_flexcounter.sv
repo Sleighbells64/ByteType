@@ -35,12 +35,34 @@ module tb_flexcounter ();
   endtask
 
   initial begin
-    $dumpfile("waveform.vcd");
-    $dumpvars(0, DUT);
-    resetDUT();
-    $display("%d", fcif.strobe);
-
-    #100 $finish;
+      run_test("test");
   end
-
-endmodule
+//   initial begin
+//     $dumpfile("waveform.vcd");
+//     $dumpvars(0, DUT);
+//     resetDUT();
+//     $display("%d", fcif.strobe);
+//
+//     // normal counting
+//     fillInterface(fcif, 1, 2);
+//     @(negedge tb_clk);
+//     @(negedge tb_clk);
+//     if (~fcif.strobe) begin
+//       $display("fcif.strobe = %d, failed to display", fcif.strobe);
+//     end
+//
+//     @(negedge tb_clk);
+//     if (fcif.strobe) begin
+//       $display("fcif.strobe = %d, failed to clear", fcif.strobe);
+//     end
+//     @(negedge tb_clk);
+//     @(negedge tb_clk);
+//     if (~fcif.strobe) begin
+//       $display("fcif.strobe = %d, failed to display 2nd time", fcif.strobe);
+//     end
+//
+//
+//     #100 $finish;
+//   end
+//
+// endmodule
