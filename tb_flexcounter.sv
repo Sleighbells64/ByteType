@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
-import uvm_pkg::*;
 `include "flexcounter_if.svh"
+`include "test.svh"
+import uvm_pkg::*;
 
 module tb_flexcounter ();
 
@@ -36,7 +37,7 @@ module tb_flexcounter ();
   endtask
 
   initial begin
-    run_test("test");
+    run_test("mytest");
   end
   //   initial begin
   //     $dumpfile("waveform.vcd");
