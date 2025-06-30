@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 `include "flexcounter_if.svh"
-`include "test.svh"
+`include "counterTest.svh"
 import uvm_pkg::*;
 
 module tb_flexcounter ();
@@ -21,8 +21,8 @@ module tb_flexcounter ();
 
   task automatic fillInterface(
   // fillInterface(.fcif(), .nRST(), .enableCounter(), .maxCount() )
-                               input logic nRST, input logic enableCounter,
-                               input logic [COUNTWIDTH-1:0] maxCount);
+    input logic nRST, input logic enableCounter,
+    input logic [COUNTWIDTH-1:0] maxCount);
     fcif.nRST = nRST;
     fcif.enableCounter = enableCounter;
     fcif.maxCount = maxCount;
@@ -37,7 +37,7 @@ module tb_flexcounter ();
   endtask
 
   initial begin
-    run_test("mytest");
+    run_test("counterTest");
   end
   //   initial begin
   //     $dumpfile("waveform.vcd");
