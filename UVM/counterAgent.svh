@@ -15,8 +15,7 @@ class counterAgent extends uvm_agent;
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
     phase.raise_objection(this);
-    `uvm_info(get_name(), "Hello World from counterAgent",
-              UVM_INFO);  // get_name=the handle == "counterAgent"
+    `uvm_info(get_name(), "Hello World from counterAgent", UVM_INFO);  // get_name=the handle == "counterAgent"
     phase.drop_objection(this);
   endtask : run_phase
 
