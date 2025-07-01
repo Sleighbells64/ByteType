@@ -1,0 +1,14 @@
+QuestaSim-64 vlog 2021.4 Compiler 2021.10 Oct 13 2021
+Start time: 11:47:24 on Jul 01,2025
+vlog "+incdir+src+UVM" "+acc" "+cover" -L /package/eda/mg/questa2021.4/questasim/uvm-1.2 tb_flexcounter.sv -logfile tb_compile.log -printinfilenames=file_search.log 
+-- Compiling interface flexcounter_if
+** Note: (vlog-2286) UVM/counterTest.svh(2): Using implicit +incdir+/package/eda/mg/questa2021.4/questasim/uvm-1.2/../verilog_src/uvm-1.2/src from import uvm_pkg
+-- Compiling package tb_flexcounter_sv_unit
+-- Importing package /package/eda/mg/questa2021.4/questasim/uvm-1.2.uvm_pkg (uvm-1.2 Built-in)
+-- Compiling module flexcounter
+-- Compiling module tb_flexcounter
+
+Top level modules:
+	tb_flexcounter
+End time: 11:47:24 on Jul 01,2025, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
