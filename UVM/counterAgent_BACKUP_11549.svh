@@ -21,3 +21,8 @@ class counterAgent extends uvm_agent;
   endtask : run_phase
 
 endclass : counterAgent
+
+<<<<<<< HEAD
+endclass: counterAgent
+=======
+>>>>>>> 98cfd8b (syncing)
