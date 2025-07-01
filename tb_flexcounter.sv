@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 `include "flexcounter_if.svh"
 `include "counterTest.svh"
+`include "flexcounter.sv"
 import uvm_pkg::*;
 
 module tb_flexcounter ();

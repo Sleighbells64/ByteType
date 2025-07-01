@@ -2,6 +2,7 @@ import uvm_pkg::*;
 `include "uvm_macros.svh"
 
 class counterAgent extends uvm_agent;
+    `uvm_component_utils(counterAgent)
 
     function new(string name = "counterAgent", uvm_component parent);
         super.new(name, parent);
