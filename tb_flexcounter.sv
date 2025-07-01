@@ -11,7 +11,11 @@ module tb_flexcounter ();
   parameter int COUNTWIDTH = $clog2(COUNTSIZE);
 
   logic tb_clk = 0;
-  always #(PERIOD / 2) tb_clk <= tb_clk + 1;  // cool oneliner to generate a clock
+  int cycleCounter = 0;
+  always #(PERIOD / 2) begin 
+    tb_clk <= tb_clk + 1;  // cool oneliner to generate a clock
+    cycleCounter++;
+  end
 
 
   flexcounter_if #(COUNTSIZE) fcif ();
