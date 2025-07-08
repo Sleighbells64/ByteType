@@ -1,12 +1,12 @@
-import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "counterAgent.svh"
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
+// `include "counterAgent.svh"
 
 class counterEnv extends uvm_env;
     `uvm_component_utils(counterEnv)
     counterAgent counterAgent_h;
     // counterScoreboard counterScoreboard_h;
-    
+
     function new(string name = "counterEnv", uvm_component parent);
         super.new(name, parent);
     endfunction: new
@@ -25,3 +25,4 @@ class counterEnv extends uvm_env;
 
 
 endclass: counterEnv
+

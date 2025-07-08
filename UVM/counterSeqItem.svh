@@ -1,5 +1,5 @@
-import uvm_pkg::*;
-`include "uvm_macros"
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
 
 class counterSeqItem extends uvm_sequence_item;
     // Control
@@ -18,7 +18,7 @@ class counterSeqItem extends uvm_sequence_item;
 
     function new(string name = "counterSeqItem");
       super.new(name);
-    `uvm_info(get_name(), "Hello World from counterSeqItem", UVM_INFO);
+      $display("Hello World from counterSeqItem"); // can't do 'uvm_info in noncomponents
     endfunction: new
 
     constraint positivelength_c {
@@ -28,4 +28,3 @@ class counterSeqItem extends uvm_sequence_item;
     maxCount > 0;
     }
 endclass: counterSeqItem
-

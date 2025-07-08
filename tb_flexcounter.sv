@@ -1,18 +1,19 @@
 `timescale 1ns / 1ps
-`include "flexcounter_if.svh"
-`include "counterTest.svh"
-`include "flexcounter.sv"
+// `include "flexcounter_if.svh"
+// `include "counterTest.svh"
+// `include "flexcounter.sv"
 import uvm_pkg::*;
+import counterUVM_pkg::*;
 
 module tb_flexcounter ();
 
   parameter int PERIOD = 20;  // ns
-  parameter int COUNTSIZE = 10000;
-  parameter int COUNTWIDTH = $clog2(COUNTSIZE);
+  localparam int COUNTSIZE = 10000;
+  localparam int COUNTWIDTH = $clog2(COUNTSIZE);
 
   logic tb_clk = 0;
   int cycleCounter = 0;
-  always #(PERIOD / 2) begin 
+  always #(PERIOD / 2) begin
     tb_clk <= tb_clk + 1;  // cool oneliner to generate a clock
     cycleCounter++;
   end

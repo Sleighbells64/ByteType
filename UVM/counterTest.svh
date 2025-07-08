@@ -1,6 +1,6 @@
-import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "counterEnv.svh"
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
+// `include "counterEnv.svh"
 
 class counterTest extends uvm_test;
   `uvm_component_utils(counterTest)
@@ -12,7 +12,7 @@ class counterTest extends uvm_test;
   endfunction
 
   function void build_phase(uvm_phase phase);
-	  super.build_phase(phase);
+    super.build_phase(phase);
     counterEnv_h = counterEnv::type_id::create("counterEnv_h", this);
   endfunction
 
@@ -24,3 +24,4 @@ class counterTest extends uvm_test;
   endtask
 
 endclass: counterTest
+
