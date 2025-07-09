@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+// `include "flexcounter_if"
 
 module flexcounter (
     flexcounter_if.counter fcif

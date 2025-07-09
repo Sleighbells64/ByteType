@@ -2,7 +2,7 @@
 // `include "uvm_macros.svh"
 // `include "counterSeqItem.svh"
 
-class counterDriver extends uvm_driver;
+class counterDriver extends uvm_driver #(counterSeqItem);
     `uvm_component_utils(counterDriver)
 
   function new(string name = "counterDriver", uvm_component parent);
@@ -18,6 +18,12 @@ class counterDriver extends uvm_driver;
     phase.raise_objection(this);
     `uvm_info(get_name(), "Hello World from counterDriver", UVM_INFO);  // get_name=the handle == "counterDriver"
     phase.drop_objection(this);
+
+    counterSeqItem seqItemObject;
+    seq_item_port.get_next_item(seqItemObject);
+    `uvm_info(get_name(), "received object", UVM_INFO);
+    seq_item_port.item_done();
+
   endtask : run_phase
 
 endclass : counterDriver

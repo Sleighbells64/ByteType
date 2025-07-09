@@ -2,7 +2,7 @@
 // `include "uvm_macros.svh"
 // `include "counterSeqItem.svh"
 
-class counterSequencer extends uvm_sequencer; // #(counterSeqItem);
+class counterSequencer extends uvm_sequencer #(counterSeqItem);
   `uvm_component_utils(counterSequencer)
 
   function new(string name = "counterSequencer", uvm_component parent);

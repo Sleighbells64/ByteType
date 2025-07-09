@@ -1,11 +1,9 @@
-`ifndef FLEXCOUNTER_IF
-`define FLEXCOUNTER_IF
 
 
 interface flexcounter_if #(
-    int COUNTSIZE  = 1024
+    int COUNTSIZE  = 1024,
+    int COUNTWIDTH = $clog2(COUNTSIZE)
 );
-  localparam int COUNTWIDTH = $clog2(COUNTSIZE);
   logic clk, nRST;
   logic enableCounter;
   logic [COUNTWIDTH-1:0] maxCount;
@@ -34,4 +32,3 @@ interface flexcounter_if #(
 endinterface
 
 
-`endif  // FLEXCOUNTER_IF

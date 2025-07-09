@@ -6,8 +6,8 @@
 class counterAgent extends uvm_agent;
     `uvm_component_utils(counterAgent)
     counterSeqItem testSequenceItem;
-    counterDriver counterDriver_h;
-    counterSequencer counterSequencer_h;
+    counterDriver #(counterSeqItem) counterDriver_h;
+    counterSequencer #(counterSeqItem) counterSequencer_h;
 
   function new(string name = "counterAgent", uvm_component parent);
     super.new(name, parent);
@@ -19,6 +19,12 @@ class counterAgent extends uvm_agent;
     counterSequencer_h = counterSequencer::type_id::create("counterSequencer_h", this);
 
   endfunction : build_phase
+
+  virtual function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+    counterDriver_h.seq_item_port.connect(counterSequencer_h.seq_item_export);
+
+  endfunction : connect_phase
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
