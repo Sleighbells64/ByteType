@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 // `include "counterTest.svh"
 // `include "flexcounter_if.svh" // CANNOT be included in the package, must be here
+`include "counterUVM_pkg.sv"
 `include "flexcounter.sv"
 import uvm_pkg::*;
 import counterUVM_pkg::*;

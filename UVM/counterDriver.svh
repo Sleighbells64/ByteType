@@ -5,6 +5,8 @@
 class counterDriver extends uvm_driver #(counterSeqItem);
     `uvm_component_utils(counterDriver)
 
+  counterSeqItem seqItemObject;
+
   function new(string name = "counterDriver", uvm_component parent);
     super.new(name, parent);
   endfunction : new
@@ -19,9 +21,8 @@ class counterDriver extends uvm_driver #(counterSeqItem);
     `uvm_info(get_name(), "Hello World from counterDriver", UVM_INFO);  // get_name=the handle == "counterDriver"
     phase.drop_objection(this);
 
-    counterSeqItem seqItemObject;
     seq_item_port.get_next_item(seqItemObject);
-    `uvm_info(get_name(), "received object", UVM_INFO);
+	    `uvm_info(get_name(), "received object", UVM_INFO);
     seq_item_port.item_done();
 
   endtask : run_phase

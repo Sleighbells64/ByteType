@@ -6,8 +6,8 @@
 class counterAgent extends uvm_agent;
     `uvm_component_utils(counterAgent)
     counterSeqItem testSequenceItem;
-    counterDriver #(counterSeqItem) counterDriver_h;
-    counterSequencer #(counterSeqItem) counterSequencer_h;
+    counterDriver counterDriver_h;
+    counterSequencer counterSequencer_h;
 
   function new(string name = "counterAgent", uvm_component parent);
     super.new(name, parent);
