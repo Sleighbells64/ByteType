@@ -2,7 +2,7 @@
 // `include "counterTest.svh"
 // `include "flexcounter_if.svh" // CANNOT be included in the package, must be here
 `include "counterUVM_pkg.sv"
-`include "flexcounter.sv"
+// `include "flexcounter.sv"
 import uvm_pkg::*;
 import counterUVM_pkg::*;
 
@@ -20,8 +20,7 @@ module tb_flexcounter ();
   end
 
 
-  flexcounter_if #(COUNTSIZE) fcif ();
-  assign fcif.clk = tb_clk;
+  flexcounter_if #(COUNTSIZE) fcif (tb_clk);
 
   flexcounter DUT (fcif);
 
@@ -44,7 +43,11 @@ module tb_flexcounter ();
   endtask
 
   initial begin
+    uvm_config_db#(virtual flexcounter_if #(COUNTSIZE) )::set(null, "", "flexcounter_if", fcif); // needs to go first
     run_test("counterTest");
+    @(negedge tb_clk);
+    @(negedge tb_clk);
+    @(negedge tb_clk);
   end
   //   initial begin
   //     $dumpfile("waveform.vcd");

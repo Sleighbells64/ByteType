@@ -19,7 +19,7 @@ class counterEnv extends uvm_env;
     task run_phase(uvm_phase phase);
         super.run_phase(phase);
         phase.raise_objection(this);
-            `uvm_info(get_name(), "Hello World from counterEnv", UVM_INFO); // get_name=the handle == "uvm_test_top"
+            `uvm_info(get_name(), "Hello World from counterEnv", UVM_INFO); // get_name=the handle == "counterEnv"
         phase.drop_objection(this);
     endtask: run_phase
 

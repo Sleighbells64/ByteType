@@ -3,8 +3,9 @@
 interface flexcounter_if #(
     int COUNTSIZE  = 1024,
     int COUNTWIDTH = $clog2(COUNTSIZE)
-);
-  logic clk, nRST;
+)
+( input logic clk);
+  logic nRST;
   logic enableCounter;
   logic [COUNTWIDTH-1:0] maxCount;
 
@@ -12,7 +13,6 @@ interface flexcounter_if #(
   logic [COUNTWIDTH-1:0] count;
 
   modport counter(
-      input clk,
       input nRST,
       input enableCounter,
       input maxCount,
@@ -21,7 +21,6 @@ interface flexcounter_if #(
   );
 
   modport controller(
-      output clk,
       output nRST,
       output enableCounter,
       output maxCount,
