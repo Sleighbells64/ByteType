@@ -21,6 +21,16 @@ class counterSeqItem extends uvm_sequence_item;
       $display("Hello World from counterSeqItem"); // can't do 'uvm_info in noncomponents
     endfunction: new
 
+    function void debugPrint();
+      $display("counterSeqItem debugPrint");
+      $display("enable %d", enable);
+      $display("maxCount %d", maxCount);
+      $display("currentCount %d", currentCount);
+      $display("testLength %d", testLength);
+      $display("CountAtStart %d", CountAtStart);
+      $display("strobe %d", strobe);
+    endfunction
+
     constraint positivelength_c {
     testLength > 0;
     }
@@ -28,3 +38,4 @@ class counterSeqItem extends uvm_sequence_item;
     maxCount > 0;
     }
 endclass: counterSeqItem
+

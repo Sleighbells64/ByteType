@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 // `include "counterTest.svh"
 // `include "flexcounter_if.svh" // CANNOT be included in the package, must be here
 `include "counterUVM_pkg.sv"
@@ -8,9 +7,6 @@ import counterUVM_pkg::*;
 
 module tb_flexcounter ();
 
-  parameter int PERIOD = 20;  // ns
-  localparam int COUNTSIZE = 10000;
-  localparam int COUNTWIDTH = $clog2(COUNTSIZE);
 
   logic tb_clk = 0;
   int cycleCounter = 0;
@@ -43,6 +39,7 @@ module tb_flexcounter ();
   endtask
 
   initial begin
+    $display("PERIOD is %d", PERIOD);
     uvm_config_db#(virtual flexcounter_if #(COUNTSIZE) )::set(null, "", "flexcounter_if", fcif); // needs to go first
     run_test("counterTest");
     @(negedge tb_clk);

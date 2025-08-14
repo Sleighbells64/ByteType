@@ -2,3 +2,7 @@ byteType/
 UVM_1.2/
 work/
 project_1/
+.stfolder/
+.svlangserver/
+.zshrc
+desktop.ini

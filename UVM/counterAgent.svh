@@ -8,6 +8,7 @@ class counterAgent extends uvm_agent;
     counterSeqItem testSequenceItem;
     counterDriver counterDriver_h;
     counterSequencer counterSequencer_h;
+    counterMonitor counterMonitor_h;
 
   function new(string name = "counterAgent", uvm_component parent);
     super.new(name, parent);
@@ -17,6 +18,7 @@ class counterAgent extends uvm_agent;
     super.build_phase(phase);
     counterDriver_h = counterDriver::type_id::create("counterDriver_h", this);
     counterSequencer_h = counterSequencer::type_id::create("counterSequencer_h", this);
+    counterMonitor_h = counterMonitor::type_id::create("counterMonitor_h", this);
 
   endfunction : build_phase
 
@@ -28,9 +30,7 @@ class counterAgent extends uvm_agent;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    phase.raise_objection(this);
-    `uvm_info(get_name(), "Hello World from counterAgent", UVM_INFO);  // get_name=the handle == "counterAgent"
-    phase.drop_objection(this);
+    `uvm_info(get_type_name(), "Hello World from counterAgent", UVM_INFO);  // get_name=the handle == "counterAgent"
 
     // `uvm_create(testSequenceItem);
     testSequenceItem = counterSeqItem::type_id::create("testSequenceItem");

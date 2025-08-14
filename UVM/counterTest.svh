@@ -20,12 +20,10 @@ class counterTest extends uvm_test;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    phase.raise_objection(this);
-    `uvm_info(get_name(), "Hello World from counterTest", UVM_INFO); // get_name == counterTest
+    `uvm_info(get_type_name(), "Hello World from counterTest", UVM_INFO); // get_type_name == counterTest
 
     counterSequence_h.start(counterEnv_h.counterAgent_h.counterSequencer_h); // TODO make sure this line works
 
-    phase.drop_objection(this);
   endtask
 
 endclass: counterTest

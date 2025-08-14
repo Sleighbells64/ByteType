@@ -15,9 +15,7 @@ class counterSequencer extends uvm_sequencer #(counterSeqItem);
 
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    phase.raise_objection(this);
-    `uvm_info(get_name(), "Hello World from counterSequencer", UVM_INFO);
-    phase.drop_objection(this);
+    `uvm_info(get_type_name(), "Hello World from counterSequencer", UVM_INFO);
   endtask : run_phase
 
 endclass
