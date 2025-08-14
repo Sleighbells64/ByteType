@@ -4,14 +4,16 @@ import counterUVM_pkg::COUNTSIZE;
 // `include "counterSeqItem.svh"
 
 class counterDriver extends uvm_driver #(counterSeqItem);
-    `uvm_component_utils(counterDriver)
+  `uvm_component_utils(counterDriver)
 
   counterSeqItem seqItemObject;
   virtual flexcounter_if #(COUNTSIZE) vif;
 
+
   function new(string name = "counterDriver", uvm_component parent);
     super.new(name, parent);
   endfunction : new
+
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
@@ -23,25 +25,41 @@ class counterDriver extends uvm_driver #(counterSeqItem);
     end
   endfunction : build_phase
 
-  task run_phase(uvm_phase phase);
+
+  virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
     `uvm_info(get_type_name(), "hello world from counterDriver", UVM_INFO);  // get_type_name=the handle == "counterDriver"
 
-    seq_item_port.get_next_item(seqItemObject);
-      `uvm_info(get_type_name(), "received object", UVM_INFO);
-    $display("does the execute_seq_item task run?");
-    // execute_seq_item(seqItemObject);
-    seqItemObject.debugPrint;
-    seq_item_port.item_done();
-    vif.enableCounter = seqItemObject.enable;
-    vif.maxCount = seqItemObject.maxCount;
-    vif.enableCounter = seqItemObject.enable;
-    for(int i = 0; i < seqItemObject.testLength; i++) begin
-      @(negedge vif.clk);
+    forever begin
+      seq_item_port.get_next_item(seqItemObject);
+        `uvm_info(get_type_name(), "received object", UVM_INFO);
+        `uvm_info(get_type_name(), $psprintf("vif.clk = %d", vif.clk), UVM_INFO);
+      $display("does the execute_seq_item task run?");
+      // execute_seq_item(seqItemObject);
+      seqItemObject.debugPrint;
+      vif.enableCounter = seqItemObject.enable;
+      vif.maxCount = seqItemObject.maxCount;
+      vif.enableCounter = seqItemObject.enable;
+      DUT_reset();
+
+      for(int i = 0; i < seqItemObject.testLength; i++) begin
+        @(negedge vif.clk);
+      end
+      #20; // make sure that this is outside of the forever loop
+
+      seq_item_port.item_done();
     end
-    #20; // make sure that this is outside of the forever loop
 
 
   endtask : run_phase
+
+
+  task DUT_reset();
+    @(negedge vif.clk);
+    vif.nRST = 0;
+    @(negedge vif.clk);
+    vif.nRST = 1;
+  endtask: DUT_reset
+
 
 endclass : counterDriver

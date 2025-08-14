@@ -9,9 +9,8 @@ module tb_flexcounter ();
 
 
   logic tb_clk = 0;
-  int cycleCounter = 0;
   always #(PERIOD / 2) begin
-    tb_clk <= tb_clk + 1;  // cool oneliner to generate a clock
+    tb_clk <= !tb_clk;  // cool oneliner to generate a clock
     cycleCounter++;
   end
 

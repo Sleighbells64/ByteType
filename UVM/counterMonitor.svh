@@ -13,7 +13,7 @@ class counterMonitor extends uvm_monitor;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     if(uvm_config_db#(virtual flexcounter_if #(COUNTSIZE) )::get(this, "", "flexcounter_if", vif) ) begin
-        `uvm_info(get_type_name(), "monitor successfully got vif", UVM_INFO);
+        `uvm_info(get_type_name(), "monitor successfully got vif", UVM_LOW);
     end
     else begin
         `uvm_error(get_type_name(), "FAILURE monitor did not get vif");
@@ -23,11 +23,14 @@ class counterMonitor extends uvm_monitor;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    `uvm_info(get_type_name(), "Hello World from counterMonitor", UVM_INFO);  // get_type_name == "counterMonitor"
+    `uvm_info(get_type_name(), "Hello World from counterMonitor", UVM_LOW);  // get_type_name == "counterMonitor"
+    // counterSeqItem transaction;
 
     forever begin
       @(posedge vif.clk);
-        $display("monitor should run here");
+      // transaction = counterSeqItem::type_id::create(.name("monitorTransaction"), .contxt(get_full_name()));
+        
+        `uvm_info(get_type_name(), "monitor should run here", UVM_LOW);
     end
     
   endtask : run_phase

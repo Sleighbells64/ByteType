@@ -9,6 +9,7 @@ package counterUVM_pkg;
   parameter int PERIOD = 20;  // ns
   parameter int COUNTSIZE = 10000;
   parameter int COUNTWIDTH = $clog2(COUNTSIZE);
+  int cycleCounter = 0;
 
   // forward declare all classees so it doesn't yell at me
   typedef class counterSeqItem;
