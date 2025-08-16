@@ -18,7 +18,7 @@ class counterSeqItem extends uvm_sequence_item;
 
     function new(string name = "counterSeqItem");
       super.new(name);
-      $display("Hello World from counterSeqItem"); // can't do 'uvm_info in noncomponents
+      // $display("Hello World from counterSeqItem"); // can't do 'uvm_info in noncomponents
     endfunction: new
 
     function void debugPrint();
@@ -32,10 +32,31 @@ class counterSeqItem extends uvm_sequence_item;
     endfunction
 
     constraint positivelength_c {
-    testLength > 0;
+      testLength > 0;
     }
+    constraint modestlength_c {
+      testLength < 30;
+    }
+
     constraint positivemaxcount_c {
-    maxCount > 0;
+      maxCount > 0;
     }
+    constraint modestmaxcount_c {
+      maxCount < 30;
+    }
+
+
+
+    virtual function void copy(counterSeqItem rhs);
+      enable = rhs.enable;
+      maxCount = rhs.maxCount;
+      currentCount = rhs.currentCount;
+      strobe = rhs.strobe;
+      testLength = rhs.testLength;
+      CountAtStart = rhs.CountAtStart;
+    endfunction: copy 
+
+
+
 endclass: counterSeqItem
 

@@ -20,9 +20,13 @@ class counterTest extends uvm_test;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    `uvm_info(get_type_name(), "Hello World from counterTest", UVM_INFO); // get_type_name == counterTest
+    `uvm_info(get_type_name(), "Hello World from counterTest", UVM_HIGH); // get_type_name == counterTest
 
-    counterSequence_h.start(counterEnv_h.counterAgent_h.counterSequencer_h); // TODO make sure this line works
+    phase.raise_objection(this, "starting sequence in test run phase"); // I have spent about 5 hours debugging before realizing this raise_objection needed to be here.
+      counterSequence_h.start(counterEnv_h.counterAgent_h.counterSequencer_h); // TODO make sure this line works
+      #10;
+    phase.drop_objection(this, "end of sequence in test run phase");
+      
 
   endtask
 

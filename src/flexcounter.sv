@@ -9,13 +9,12 @@ module flexcounter (
 
 
   always_comb begin : comb_flexcounter
-    fcif.strobe = 0;
     n_count = 0;
+
     if (fcif.enableCounter) begin
       n_count = fcif.count + 1;
       if (fcif.count >= fcif.maxCount) begin  // >= in case maxCount moves
-        n_count = 0;
-        fcif.strobe = 1;  // strobe isn't registered explicitly, could cause trouble
+        n_count = 1;
       end
     end
 
@@ -27,6 +26,13 @@ module flexcounter (
       fcif.count <= 0;
     end else begin
       fcif.count <= n_count;
+
+      if( fcif.enableCounter && (n_count == fcif.maxCount) ) begin
+        fcif.strobe <= 1;
+      end else begin
+        fcif.strobe <= 0;
+      end
+
     end
   end
 

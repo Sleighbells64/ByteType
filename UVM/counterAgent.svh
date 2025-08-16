@@ -30,7 +30,7 @@ class counterAgent extends uvm_agent;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    `uvm_info(get_type_name(), "Hello World from counterAgent", UVM_INFO);  // get_name=the handle == "counterAgent"
+    `uvm_info(get_type_name(), "Hello World from counterAgent", UVM_HIGH);  // get_name=the handle == "counterAgent"
 
     // `uvm_create(testSequenceItem);
     testSequenceItem = counterSeqItem::type_id::create("testSequenceItem");

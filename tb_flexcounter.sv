@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 // `include "counterTest.svh"
 // `include "flexcounter_if.svh" // CANNOT be included in the package, must be here
 `include "counterUVM_pkg.sv"
@@ -9,9 +11,11 @@ module tb_flexcounter ();
 
 
   logic tb_clk = 0;
-  always #(PERIOD / 2) begin
-    tb_clk <= !tb_clk;  // cool oneliner to generate a clock
-    cycleCounter++;
+  initial begin
+    forever #(PERIOD / 2) begin
+      cycleCounter += tb_clk == 0; // increments the count when clk is low, so when it is a posedge
+      tb_clk <= !tb_clk;  // cool oneliner to generate a clock
+    end
   end
 
 
@@ -41,9 +45,6 @@ module tb_flexcounter ();
     $display("PERIOD is %d", PERIOD);
     uvm_config_db#(virtual flexcounter_if #(COUNTSIZE) )::set(null, "", "flexcounter_if", fcif); // needs to go first
     run_test("counterTest");
-    @(negedge tb_clk);
-    @(negedge tb_clk);
-    @(negedge tb_clk);
   end
   //   initial begin
   //     $dumpfile("waveform.vcd");

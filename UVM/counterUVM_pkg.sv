@@ -20,6 +20,7 @@ package counterUVM_pkg;
   typedef class counterEnv;
   typedef class counterTest;
   typedef class counterSequence;
+  typedef class counterScoreboard;
 
 
   // actually declare all classes
@@ -31,5 +32,6 @@ package counterUVM_pkg;
   `include "counterAgent.svh"
   `include "counterEnv.svh"
   `include "counterTest.svh"
+  `include "counterScoreboard.svh"
 
 endpackage
