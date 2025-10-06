@@ -40,15 +40,6 @@ module keyboard_controller #(parameter int CLOCKDIVISOR = 1000) (
 
       if(keyValues == testingByte) begin
         n_steadyCount = steadyCount + 1;
-
-        if(steadyCount == STEADYCOUNTTHRESHOLD) begin
-          if(testingByte != savedByte) begin
-            n_keyReady = 1;
-            n_savedByte = testingByte;
-            n_steadyCount = 0;
-          end
-        end
-
       end
       else begin
         n_steadyCount = 0;
@@ -56,8 +47,31 @@ module keyboard_controller #(parameter int CLOCKDIVISOR = 1000) (
       end
 
     end
-    
 
+    if(steadyCount == STEADYCOUNTTHRESHOLD) begin
+      if(testingByte != savedByte) begin
+        n_keyReady = 1;
+        n_savedByte = testingByte;
+        n_steadyCount = 0;
+      end
+    end
+   
+
+  end
+
+  always_ff @(posedge clk) begin : keyboard_controller_ff
+    if(!nRST) begin
+      savedByte <= '0;
+      testingByte <= '0;
+      steadyCount <= '0;
+      keyReady <= 0;
+    end
+    else begin
+      savedByte <= n_savedByte;
+      testingByte <= n_testingByte;
+      steadyCount <= n_steadyCount;
+      keyReady <= n_keyReady;
+    end
   end
 
 endmodule

@@ -1,0 +1,141 @@
+module usblut( 
+  input logic [6:0] key, 
+  output logic [7:0] value
+  );
+
+logic [7:0] [127:0] LUT;
+
+  assign value = LUT[key];
+
+//****************************************
+  assign LUT[0] = 8'h00; // NUL
+  assign LUT[1] = 8'hXX;// SOH
+  assign LUT[2] = 8'hXX;// STX
+  assign LUT[3] = 8'hXX;// ETX
+  assign LUT[4] = 8'hXX;// EOT
+  assign LUT[5] = 8'hXX;// ENQ
+  assign LUT[6] = 8'hXX;// ACK
+  assign LUT[7] = 8'hXX;// BEL
+  assign LUT[8] = 8'h2A;// BS
+  assign LUT[9] = 8'hXX;// HT
+  assign LUT[10] = 8'hXX;// LF
+  assign LUT[11] = 8'hXX;// VT
+  assign LUT[12] = 8'hXX;// FF
+  assign LUT[13] = 8'hXX;// CR
+  assign LUT[14] = 8'hXX;// SO
+  assign LUT[15] = 8'hXX;// SI
+  assign LUT[16] = 8'hXX;// DLE
+  assign LUT[17] = 8'h5C;// DC1 // left arrow
+  assign LUT[18] = 8'h5A;// DC2 // down arrow
+  assign LUT[19] = 8'h60;// DC3 // up arrow
+  assign LUT[20] = 8'h5E;// DC4 // right arrow
+  assign LUT[21] = 8'hXX;// NAK
+  assign LUT[22] = 8'hXX;// SYN
+  assign LUT[23] = 8'hXX;// ETB
+  assign LUT[24] = 8'hXX;// CAN
+  assign LUT[25] = 8'hXX;// EM
+  assign LUT[26] = 8'hXX;// SUB
+  assign LUT[27] = 8'h29;// ESC
+  assign LUT[28] = 8'hXX;// FS
+  assign LUT[29] = 8'hXX;// GS
+  assign LUT[30] = 8'hXX;// RS
+  assign LUT[31] = 8'hXX;// US
+  assign LUT[32] = 8'h2C;// space
+  assign LUT[33] = 8'h1E | 8'h80;// !
+  assign LUT[34] = 8'h34 | 8'h80;// "
+  assign LUT[35] = 8'h20 | 8'h80;// #
+  assign LUT[36] = 8'h21 | 8'h80;// $
+  assign LUT[37] = 8'h22 | 8'h80;// %
+  assign LUT[38] = 8'h24 | 8'h80;// &
+  assign LUT[39] = 8'h34;// '
+  assign LUT[40] = 8'h26 | 8'h80;// (
+  assign LUT[41] = 8'h27 | 8'h80;// )
+  assign LUT[42] = 8'h25 | 8'h80;// *
+  assign LUT[43] = 8'h2E | 8'h80;// +
+  assign LUT[44] = 8'h36;// ,
+  assign LUT[45] = 8'h2D;// -
+  assign LUT[46] = 8'h37;// .
+  assign LUT[47] = 8'h38;// /
+  assign LUT[48] = 8'h27;// 0
+  assign LUT[49] = 8'h1E;// 1
+  assign LUT[50] = 8'h1F;// 2
+  assign LUT[51] = 8'h20;// 3
+  assign LUT[52] = 8'h21;// 4
+  assign LUT[53] = 8'h22;// 5
+  assign LUT[54] = 8'h23;// 6
+  assign LUT[55] = 8'h24;// 7
+  assign LUT[56] = 8'h25;// 8
+  assign LUT[57] = 8'h26;// 9
+  assign LUT[58] = 8'h33 | 8'h80;// :
+  assign LUT[59] = 8'h33;// ;
+  assign LUT[60] = 8'h36 | 8'h80;// <
+  assign LUT[61] = 8'h2E;// =
+  assign LUT[62] = 8'h37 | 8'h80;// >
+  assign LUT[63] = 8'h38 | 8'h80;// ?
+  assign LUT[64] = 8'h1F | 8'h80;// @
+  assign LUT[65] = 8'h04 | 8'h80;// A
+  assign LUT[66] = 8'h05 | 8'h80;// B
+  assign LUT[67] = 8'h06 | 8'h80;// C
+  assign LUT[68] = 8'h07 | 8'h80;// D
+  assign LUT[69] = 8'h08 | 8'h80;// E
+  assign LUT[70] = 8'h09 | 8'h80;// F
+  assign LUT[71] = 8'h0A | 8'h80;// G
+  assign LUT[72] = 8'h0B | 8'h80;// H
+  assign LUT[73] = 8'h0C | 8'h80;// I
+  assign LUT[74] = 8'h0D | 8'h80;// J
+  assign LUT[75] = 8'h0E | 8'h80;// K
+  assign LUT[76] = 8'h0F | 8'h80;// L
+  assign LUT[77] = 8'h10 | 8'h80;// M
+  assign LUT[78] = 8'h11 | 8'h80;// N
+  assign LUT[79] = 8'h12 | 8'h80;// O
+  assign LUT[80] = 8'h13 | 8'h80;// P
+  assign LUT[81] = 8'h14 | 8'h80;// Q
+  assign LUT[82] = 8'h15 | 8'h80;// R
+  assign LUT[83] = 8'h16 | 8'h80;// S
+  assign LUT[84] = 8'h17 | 8'h80;// T
+  assign LUT[85] = 8'h18 | 8'h80;// U
+  assign LUT[86] = 8'h19 | 8'h80;// V
+  assign LUT[87] = 8'h1A | 8'h80;// W
+  assign LUT[88] = 8'h1B | 8'h80;// X
+  assign LUT[89] = 8'h1C | 8'h80;// Y
+  assign LUT[90] = 8'h1D | 8'h80;// Z
+  assign LUT[91] = 8'h2F;// [
+  assign LUT[92] = 8'h31;// \
+  assign LUT[93] = 8'h30;// ]
+  assign LUT[94] = 8'h23 | 8'h80;// ^
+  assign LUT[95] = 8'h2D | 8'h80;// _
+  assign LUT[96] = 8'h35;// `
+  assign LUT[97] = 8'h04;// a
+  assign LUT[98] = 8'h05;// b
+  assign LUT[99] = 8'h06;// c
+  assign LUT[100] = 8'h07;// d
+  assign LUT[101] = 8'h08;// e
+  assign LUT[102] = 8'h09;// f
+  assign LUT[103] = 8'h0A;// g
+  assign LUT[104] = 8'h0B;// h
+  assign LUT[105] = 8'h0C;// i
+  assign LUT[106] = 8'h0D;// j
+  assign LUT[107] = 8'h0E;// k
+  assign LUT[108] = 8'h0F;// l
+  assign LUT[109] = 8'h10;// m
+  assign LUT[110] = 8'h11;// n
+  assign LUT[111] = 8'h12;// o
+  assign LUT[112] = 8'h13;// p
+  assign LUT[113] = 8'h14;// q
+  assign LUT[114] = 8'h15;// r
+  assign LUT[115] = 8'h16;// s
+  assign LUT[116] = 8'h17;// t
+  assign LUT[117] = 8'h18;// u
+  assign LUT[118] = 8'h19;// v
+  assign LUT[119] = 8'h1A;// w
+  assign LUT[120] = 8'h1B;// x
+  assign LUT[121] = 8'h1C;// y
+  assign LUT[122] = 8'h1D;// z
+  assign LUT[123] = 8'h2F | 8'h80;// {
+  assign LUT[124] = 8'h31 | 8'h80;// |
+  assign LUT[125] = 8'h30 | 8'h80;// }
+  assign LUT[126] = 8'h35 | 8'h80;// ~
+  assign LUT[127] = 8'h4C;// DEL
+//****************************************
+
+  endmodule

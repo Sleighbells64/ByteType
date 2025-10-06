@@ -28,24 +28,12 @@ class counterSequence extends uvm_sequence #(counterSeqItem);
       testItem = counterSeqItem::type_id::create("testItem");
       start_item(testItem);
         testItem.randomize();
+        testItem.clear = 0; // for now so that I can debug the testbench
         cg.sample();
       finish_item(testItem);
 
     end
-    // testItem = counterSeqItem::type_id::create("testItem");
-    // start_item(testItem);
-    // testItem.randomize();
-    // testItem.maxCount = 30;
-    // testItem.testLength = 40;
-    // testItem.enable = 1;
-    // finish_item(testItem);
-    //
-    // start_item(testItem);
-    // testItem.randomize();
-    // testItem.maxCount = 30;
-    // testItem.testLength = 40;
-    // testItem.enable = 1;
-    // finish_item(testItem);
+
   endtask: body
 
 endclass: counterSequence

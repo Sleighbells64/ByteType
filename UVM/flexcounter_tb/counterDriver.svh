@@ -70,6 +70,7 @@ class counterDriver extends uvm_driver #(counterSeqItem);
 
   task set_testcase();
       vif.enableCounter = seqItemObject.enable;
+      vif.clear = seqItemObject.clear;
       vif.maxCount = seqItemObject.maxCount;
       seqItemObject.CountAtStart = cycleCounter; // sets the starting point of the testcase
       seqItemObject.currentCount = vif.count; // lets the scoreboard know the starting point of the testcase

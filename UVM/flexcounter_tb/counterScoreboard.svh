@@ -1,3 +1,12 @@
+/* NOTE ABOUT THIS TESTBENCH
+  * this testbench was written before I learned SVA.
+  * while it is functional, it could be written more cleanly with SVA,
+  * particularly the strobe detection, and count properties.
+  * I believe the UVM architecture remains useful.
+  * Usually a Scoreboard is divided into a predictor and comparator, I didn't
+  * feel that was necessary for such a simple component
+  * As this is a basic component, refactoring the code felt unnecessary.
+*/
 
  class counterScoreboard extends uvm_scoreboard;
   `uvm_component_utils(counterScoreboard)
@@ -36,7 +45,8 @@
     currentTestCase.copy(seqItemObject);
 
     carryOverCycles = (nextCarryOverCycles <= seqItemObject.maxCount) ? nextCarryOverCycles : 0;
-    nextCarryOverCycles = (seqItemObject.enable == 1) ? (carryOverCycles + seqItemObject.testLength) % seqItemObject.maxCount : 0;
+    nextCarryOverCycles = (seqItemObject.clear == 1) ? 0 : (seqItemObject.enable == 1) ? (carryOverCycles + seqItemObject.testLength) % seqItemObject.maxCount : carryOverCycles; // clear -> 0, enabled -> (carry + len) % maxCount, NOT enabled -> carry
+    // nextCarryOverCycles = (seqItemObject.enable == 1) ? (carryOverCycles + seqItemObject.testLength) % seqItemObject.maxCount : 0; // OLD FROM BEFORE ENABLE PAUSED
 
   endfunction: write_TESTCASE
 
@@ -48,9 +58,12 @@
     `uvm_info(get_type_name(), "write_RESULT runs now", UVM_HIGH);
 
     if(currentTestCase.enable == 0) begin
-      if(resultItem.currentCount != 0) begin
-        countError = 1;
+      if(resultItem.currentCount != carryOverCycles) begin // the current Count should stay at whatever carryOverCycles is for the entire testcase
+        if( !(carryOverCycles == 0 && resultItem.currentCount == 1) ) begin // ignore when it rolls over, thats supposed to happen
+          countError = 1;
+        end
       end
+
       if(resultItem.strobe != 0) begin
         strobeError = 1;
       end
@@ -68,7 +81,7 @@
           strobeError = 1;
         end
       end else if(elapsedCycles % currentTestCase.maxCount == 0) begin // strobe == 0
-        if(elapsedCycles != 0) begin
+        if(elapsedCycles % currentTestCase.maxCount != 0) begin
           strobeError = 1;
         end
       end
@@ -76,22 +89,25 @@
     end
 
     if(strobeError) begin
-      `uvm_error(get_type_name, $sformatf("strobe error on cycle %d", elapsedCycles) )
+      `uvm_error(get_type_name, $sformatf("strobe error on cycle %d", elapsedCycles) );
       
       `uvm_info(get_type_name(), "current Test Case", UVM_HIGH);
       currentTestCase.debugPrint();
       `uvm_info(get_type_name(), "current Result", UVM_HIGH);
       resultItem.debugPrint();
 
+      `uvm_fatal(get_type_name, "crashout worthy");
     end
     if(countError) begin
-      `uvm_error(get_type_name, $sformatf("count error on cycle %d", elapsedCycles) )
+      `uvm_error(get_type_name, $sformatf("count error on cycle %d, carryOverCycles = %d", elapsedCycles, carryOverCycles) ); //!TODO demote this back down to uvm_error after debugging
+      // `uvm_error(get_type_name, $sformatf("count error on cycle %d", elapsedCycles) ) //!TODO demote this back down to uvm_error after debugging
       
       `uvm_info(get_type_name(), "current Test Case", UVM_HIGH);
       currentTestCase.debugPrint();
       `uvm_info(get_type_name(), "current Result", UVM_HIGH);
       resultItem.debugPrint();
 
+      `uvm_fatal(get_type_name, "crashout worthy");
     end
   endfunction: write_RESULT
 

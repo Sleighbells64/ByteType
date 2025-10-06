@@ -35,6 +35,7 @@ class counterMonitor extends uvm_monitor;
         
       transaction = counterSeqItem::type_id::create("transaction");
       transaction.enable = vif.enableCounter;
+      transaction.clear = vif.clear;
       transaction.currentCount = vif.count;
       transaction.strobe = vif.strobe;
       transaction.CountAtStart = cycleCounter;

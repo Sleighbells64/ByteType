@@ -7,6 +7,7 @@ interface flexcounter_if #(
 ( input logic clk);
     logic nRST;
     logic enableCounter;
+    logic clear;
     logic [COUNTWIDTH-1:0] maxCount;
 
     logic strobe;
@@ -16,6 +17,7 @@ interface flexcounter_if #(
         input clk,
         input nRST,
         input enableCounter,
+        input clear,
         input maxCount,
         output strobe,
         output count

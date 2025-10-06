@@ -9,15 +9,17 @@ module flexcounter (
 
 
   always_comb begin : comb_flexcounter
-    n_count = 0;
 
-    if (fcif.enableCounter) begin
-      n_count = fcif.count + 1;
-      if (fcif.count >= fcif.maxCount) begin  // >= in case maxCount moves
-        n_count = 1;
-      end
+    n_count = fcif.count;
+    if(fcif.clear) begin
+      n_count = 0;
     end
-
+    else if (fcif.enableCounter) begin
+      n_count = fcif.count + 1;
+    end
+    if (fcif.count >= fcif.maxCount) begin  // >= in case maxCount moves
+      n_count = 1;
+    end
   end
 
 

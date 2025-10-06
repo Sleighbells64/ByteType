@@ -11,7 +11,7 @@ class counterEnv extends uvm_env;
         super.new(name, parent);
 
 
-        set_report_verbosity_level_hier(UVM_MEDIUM); // set the verbosity here
+        set_report_verbosity_level_hier(UVM_FULL); // set the verbosity here
 
 
     endfunction: new

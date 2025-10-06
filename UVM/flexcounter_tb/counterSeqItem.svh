@@ -4,6 +4,7 @@
 class counterSeqItem extends uvm_sequence_item;
     // Control
     rand bit enable;
+    rand bit clear;
     rand int maxCount; // the max number to count to before setting strobe
     // Payload
     int currentCount;
@@ -48,6 +49,7 @@ class counterSeqItem extends uvm_sequence_item;
 
 
     virtual function void copy(counterSeqItem rhs);
+      clear = rhs.clear;
       enable = rhs.enable;
       maxCount = rhs.maxCount;
       currentCount = rhs.currentCount;
